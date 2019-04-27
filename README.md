@@ -44,7 +44,8 @@ The main steps to setup your problem and solve it using YPEA are listed below:
 ## A Classic Sample
 ### Problem Definition
 Assume that we would like to find 20 real numbers in the range [-10,10], which minimize the value of well-known sphere function, defined by:
-$$ f_{sphere}(x) = \sum_{i=1}^{n} x_i^2 $$
+
+![sphere](http://latex.codecogs.com/gif.latex?%5Cbg_white%20f_%7Bsphere%7D%28x%29%20%3D%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%20x_i%5E2)
 
 To define this problem, we run these commands in MATLAB:
 ```
