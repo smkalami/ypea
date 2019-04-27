@@ -41,7 +41,7 @@ The main steps to setup your problem and solve it using YPEA are listed below:
     - Call `solve` method of the algorithm, passing the problem object into it
     - Get the optimization results and visualize (if needed to do so)
 
-## A Classic Sample
+## A Classic Example
 ### Problem Definition
 Assume that we would like to find 20 real numbers in the range [-10,10], which minimize the value of well-known sphere function, defined by:
 
@@ -102,12 +102,12 @@ It is possible to pass the problem to other algorithm to get it solved. For exam
 ```matlab
 de = ypea_de('DE/best/2/bin');
 
-alg.max_iter = 1000;
-alg.pop_size = 20;
+de.max_iter = 1000;
+de.pop_size = 20;
 
-alg.beta_min = 0.1;
-alg.beta_max = 0.9;
-alg.crossover_prob = 0.1;
+de.beta_min = 0.1;
+de.beta_max = 0.9;
+de.crossover_prob = 0.1;
 ```
 
 By calling `solve` method of DE and passing the problem into it, we can solve the optimization problem:
