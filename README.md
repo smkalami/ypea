@@ -45,9 +45,9 @@ The main steps to setup your problem and solve it using YPEA are listed below:
 ### Problem Definition
 Assume that we would like to find 20 real numbers in the range [-10,10], which minimize the value of well-known sphere function, defined by:
 
-<div style="text-align: center">
-<img src="assets/img/eq.sphere.gif">
-</div>
+<p style="text-align: center;">
+    <img src="assets/img/eq.sphere.gif">
+</p>
 
 To define this problem, we run these commands in MATLAB:
 ```matlab
@@ -112,7 +112,7 @@ alg.crossover_prob = 0.1;
 
 By calling `solve` method of DE and passing the problem into it, we can solve the optimization problem:
 ```matlab
-de_best_sol = pso.solve(problem);
+de_best_sol = de.solve(problem);
 ```
 
 The best solution found by Differential Evolution is given by:
