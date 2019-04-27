@@ -45,10 +45,12 @@ The main steps to setup your problem and solve it using YPEA are listed below:
 ### Problem Definition
 Assume that we would like to find 20 real numbers in the range [-10,10], which minimize the value of well-known sphere function, defined by:
 
-![sphere](http://latex.codecogs.com/gif.latex?%5Cbg_white%20f_%7Bsphere%7D%28x%29%20%3D%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%20x_i%5E2)
+<div style="text-align: center">
+<img src="assets/img/eq.sphere.gif">
+</div>
 
 To define this problem, we run these commands in MATLAB:
-```
+```matlab
 problem = ypea_problem();
 
 problem.type = 'min';
@@ -62,7 +64,7 @@ problem.obj_func = @(sol) sphere(sol.x);
 
 ### Particle Swarm Optimization (PSO)
 Now, we are ready to use any of algorithms available in YPEA to solve the problem we just defind. Here we are going to use Particle Swarm Otimization (PSO). Let's create an instance of PSO (`ypea_pso`) and set its parameters.
-```
+```matlab
 pso = ypea_pso();
 
 pso.max_iter = 100;
@@ -75,19 +77,19 @@ pso.c2 = 2;
 ```
 
 One may use so-called Constriction Coefficients for PSO, by running these commands:
-```
+```matlab
 phi1 = 2.05;
 phi2 = 2.05;
 pso.use_constriction_coeffs(phi1, phi2);
 ```
 
 Now, we are ready to get our problem solved. Let's call the `solve` method of PSO:
-```
+```matlab
 pso_best_sol = pso.solve(problem);
 ```
 
 The best solution found by PSO is accessible via:
-```
+```matlab
 pso_best_sol.solution.x
 ```
 
@@ -97,7 +99,7 @@ It is possible to pass the problem to other algorithm to get it solved. For exam
 - using two difference vectors for mutations (creating trial vector),
 - and using binary method for crossover.
 
-```
+```matlab
 de = ypea_de('DE/best/2/bin');
 
 alg.max_iter = 1000;
@@ -109,12 +111,12 @@ alg.crossover_prob = 0.1;
 ```
 
 By calling `solve` method of DE and passing the problem into it, we can solve the optimization problem:
-```
+```matlab
 de_best_sol = pso.solve(problem);
 ```
 
 The best solution found by Differential Evolution is given by:
-```
+```matlab
 de_best_sol.solution.x
 ```
 
