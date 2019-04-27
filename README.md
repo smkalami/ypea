@@ -45,9 +45,9 @@ The main steps to setup your problem and solve it using YPEA are listed below:
 ### Problem Definition
 Assume that we would like to find 20 real numbers in the range [-10,10], which minimize the value of well-known sphere function, defined by:
 
-<div class="text-center">
+<p align="center">
     <img src="assets/img/eq.sphere.gif">
-</div>
+</p>
 
 To define this problem, we run these commands in MATLAB:
 ```matlab
