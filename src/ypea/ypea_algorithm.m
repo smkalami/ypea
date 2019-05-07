@@ -277,7 +277,7 @@ classdef (Abstract) ypea_algorithm < handle
                     hh = plot(this.nfe_history, this.best_obj_value_history, varargin{:});
                     
                 otherwise
-                    error("MODE must be 'iteration' or 'nfe'.");
+                    error('MODE must be ''iteration'' or ''nfe''.');
                     
             end
             

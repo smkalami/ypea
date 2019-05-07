@@ -90,7 +90,7 @@ classdef ypea_ga < ypea_algorithm
                     value = 'roulettewheel';
                     
                 otherwise
-                    error("Invalid selection method. Must be 'random' or 'roulettewheel'.");
+                    error('Invalid selection method. Must be ''random'' or ''roulettewheel''.');
             end
             this.selection = value;
         end

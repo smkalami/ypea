@@ -13,7 +13,7 @@ end
 function funcs = get_var_definition_funcs()
 
     p = ypea_path();
-    items = dir([p '\ypea_define_var_type_*.m']);
+    items = dir(fullfile(p, 'ypea_define_var_type_*.m'));
     
     funcs = cell(size(items));
     
