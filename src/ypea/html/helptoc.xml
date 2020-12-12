@@ -26,7 +26,7 @@
                 Artificial Bee Colony
             </tocitem>
             <tocitem target="doc_ypea_acor.html" image="HelpIcon.HelpIcon.EXAMPLES">
-                Continuous Ant Colony Optimization
+                Ant Colony Optimization for Continuous Domains
             </tocitem>
             <tocitem target="doc_ypea_ba.html" image="HelpIcon.HelpIcon.EXAMPLES">
                 Bees Algorithm
@@ -36,6 +36,9 @@
             </tocitem>
             <tocitem target="doc_ypea_cmaes.html" image="HelpIcon.HelpIcon.EXAMPLES">
                 Covariance Matrix Adaptation Evolution Strategy
+            </tocitem>
+            <tocitem target="doc_ypea_ca.html" image="HelpIcon.HelpIcon.EXAMPLES">
+                Cultural Algorithm
             </tocitem>
             <tocitem target="doc_ypea_de.html" image="HelpIcon.HelpIcon.EXAMPLES">
                 Differential Evolution

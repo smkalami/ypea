@@ -1,7 +1,7 @@
 function varargout = ypea_version()
     % Returns Version of YPEA Toolbox
     
-    version = '1.0';
+    version = '1.1';
     
     if nargout > 0
         varargout{:} = version;

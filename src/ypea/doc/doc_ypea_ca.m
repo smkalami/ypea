@@ -1,6 +1,6 @@
-%% Ant Colony Optimization for Continuous Domains
+%% Cultural Algorithm
 % This document shows how
-% *Ant Colony Optimization for Continuous Domains (ACOR)*
+% *Cultural Algorithm (CA)*
 % as a part of Yarpiz Evolutionary Algorithms Toolbox (YPEA)
 % cab be used to solve optimization problems.
 
@@ -28,35 +28,61 @@ problem.obj_func = @(sol) sphere(sol.x);
 % <doc_ypea_problem.html Optimization Problems> and
 % <doc_ypea_var.html Decision Variables>.
 
-%% Ant Colony Optimization for Continuous Domains
+%% Cultural Algorithm
 % Now, we are ready to create, initialize and utilize the
-% Ant Colony Optimization for Continuous Domains (ACOR)
+% Cultural Algorithm (CA)
 % to solve the optimization problem, defined above.
 
 %%
 % First, we must create an instance of algorithm class:
-alg = ypea_acor();
+alg = ypea_ca();
 
 %%
-% Let's set the parameters of the algorithm.
+% There are four type of influence method for Cultural Algorithm
+% available in YPEA Toolbox. The method is defined and set by
+% |alg.influence_type|. Available culture influence methods are listed
+% below:
+% 
+% * *Using only normative component of culture* (for size),
+% which can be set and used by |alg.influence_type = 1|.
+% * *Using only situational component of culture* (for direction),
+% which can be set and used by |alg.influence_type = 2|.
+% * *Using both normative and situational components of culture*,
+% which can be set and used by |alg.influence_type = 3|. This is the
+% default method.
+% * *Using normative component of culture* (for both size ans direction),
+% which can be set and used by |alg.influence_type = 4|.
+% 
+
+%%
+% Other parameters for the Cultural Algorithm are listed below:
+% 
+% * Acceptance Rate, which determines the number of individuals used to adjust culture (|accept_rate|, default: 0.2)
+% * Step Size Coefficient (|alpha|, default: 0.9)
+% * Scaling Factor, which is only used by 4th influence method (|beta|, default: 0.5)
+% 
+
+%%
+% Now, let's set the parameters of the algorithm.
 
 % Maximum Number of Iterations
-alg.max_iter = 200;
+alg.max_iter = 100;
 
-% Population Size (Solution Archive Size)
-alg.pop_size = 10;
+% Population Size
+alg.pop_size = 50;
 
-% Number of Newly Generated Samples
-alg.sample_count = 50;
+% Type of Culture Influence Method
+alg.influence_type = 3;
 
-% Intensification Factor (Selection Pressure)
-alg.q = 0.5;
+% Acceptance Rate
+alg.accept_rate = 0.2;
 
-% Deviation-Distance Ratio
-alg.zeta = 1;
+% Step Size Coefficient
+alg.alpha = 0.9;
+
 
 %%
-% And now, we are ready to run the algorithm and solve the problem.
+% We are ready to run the algorithm and solve the problem.
 % The solve method, gets problem as input and returns |best_sol|, the best solution found
 % by the algorithm.
 

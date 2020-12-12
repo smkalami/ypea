@@ -6,8 +6,8 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Ant Colony Optimization for Continuous Domains</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-04-27"><meta name="DC.source" content="doc_ypea_acor.m"><style type="text/css">
-html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+      --><title>Cultural Algorithm</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-12-12"><meta name="DC.source" content="doc_ypea_ca.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
 html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
@@ -23,7 +23,7 @@ a:visited { color:#004aa0; text-decoration:none; }
 
 p { padding:0px; margin:0px 0px 20px; }
 img { padding:0px; margin:0px 0px 20px; border:none; }
-p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
 
 ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
 ul li { padding:0px; margin:0px 0px 7px 0px; }
@@ -52,6 +52,7 @@ span.comment { color:#228B22 }
 span.string { color:#A020F0 }
 span.untermstring { color:#B20000 }
 span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
 
 .footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
 .footer p { margin:0px; }
@@ -66,87 +67,80 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1>Ant Colony Optimization for Continuous Domains</h1><!--introduction--><p>This document shows how <b>Ant Colony Optimization for Continuous Domains (ACOR)</b> as a part of Yarpiz Evolutionary Algorithms Toolbox (YPEA) cab be used to solve optimization problems.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Problem Definition</a></li><li><a href="#6">Ant Colony Optimization for Continuous Domains</a></li><li><a href="#11">Results</a></li></ul></div><h2 id="1">Problem Definition</h2><p>First of all, we need to define optimization problem. We must define the search space (decision variables) and objective function.</p><p>Let's ceate an instance of optimization problem.</p><pre class="codeinput">problem = ypea_problem();
+  </style></head><body><div class="content"><h1>Cultural Algorithm</h1><!--introduction--><p>This document shows how <b>Cultural Algorithm (CA)</b> as a part of Yarpiz Evolutionary Algorithms Toolbox (YPEA) cab be used to solve optimization problems.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Problem Definition</a></li><li><a href="#6">Cultural Algorithm</a></li><li><a href="#13">Results</a></li></ul></div><h2 id="1">Problem Definition</h2><p>First of all, we need to define optimization problem. We must define the search space (decision variables) and objective function.</p><p>Let's ceate an instance of optimization problem.</p><pre class="codeinput">problem = ypea_problem();
 </pre><p>Assume that the problem is to find 20 real numbers, in range -10 to 10.</p><pre class="codeinput">problem.vars = ypea_var(<span class="string">'x'</span>, <span class="string">'real'</span>, <span class="string">'size'</span>, 20, <span class="string">'lower_bound'</span>, -10, <span class="string">'upper_bound'</span>, 10);
 </pre><p>And, the objective is to minimize the well-known <i>sphere</i> function in this domain.</p><pre class="codeinput">sphere = ypea_test_function(<span class="string">'sphere'</span>);
 problem.obj_func = @(sol) sphere(sol.x);
-</pre><p>To get more information on the optimization problems and decision variables, you can go to <a href="doc_ypea_problem.html">Optimization Problems</a> and <a href="doc_ypea_var.html">Decision Variables</a>.</p><h2 id="6">Ant Colony Optimization for Continuous Domains</h2><p>Now, we are ready to create, initialize and utilize the Ant Colony Optimization for Continuous Domains (ACOR) to solve the optimization problem, defined above.</p><p>First, we must create an instance of algorithm class:</p><pre class="codeinput">alg = ypea_acor();
-</pre><p>Let's set the parameters of the algorithm.</p><pre class="codeinput"><span class="comment">% Maximum Number of Iterations</span>
-alg.max_iter = 200;
+</pre><p>To get more information on the optimization problems and decision variables, you can go to <a href="doc_ypea_problem.html">Optimization Problems</a> and <a href="doc_ypea_var.html">Decision Variables</a>.</p><h2 id="6">Cultural Algorithm</h2><p>Now, we are ready to create, initialize and utilize the Cultural Algorithm (CA) to solve the optimization problem, defined above.</p><p>First, we must create an instance of algorithm class:</p><pre class="codeinput">alg = ypea_ca();
+</pre><p>There are four type of influence method for Cultural Algorithm available in YPEA Toolbox. The method is defined and set by <tt>alg.influence_type</tt>. Available culture influence methods are listed below:</p><div><ul><li><b>Using only normative component of culture</b> (for size), which can be set and used by <tt>alg.influence_type = 1</tt>.</li><li><b>Using only situational component of culture</b> (for direction), which can be set and used by <tt>alg.influence_type = 2</tt>.</li><li><b>Using both normative and situational components of culture</b>, which can be set and used by <tt>alg.influence_type = 3</tt>. This is the default method.</li><li><b>Using normative component of culture</b> (for both size ans direction), which can be set and used by <tt>alg.influence_type = 4</tt>.</li></ul></div><p>Other parameters for the Cultural Algorithm are listed below:</p><div><ul><li>Acceptance Rate, which determines the number of individuals used to adjust culture (<tt>accept_rate</tt>, default: 0.2)</li><li>Step Size Coefficient (<tt>alpha</tt>, default: 0.9)</li><li>Scaling Factor, which is only used by 4th influence method (<tt>beta</tt>, default: 0.5)</li></ul></div><p>Now, let's set the parameters of the algorithm.</p><pre class="codeinput"><span class="comment">% Maximum Number of Iterations</span>
+alg.max_iter = 100;
 
-<span class="comment">% Population Size (Solution Archive Size)</span>
-alg.pop_size = 10;
+<span class="comment">% Population Size</span>
+alg.pop_size = 50;
 
-<span class="comment">% Number of Newly Generated Samples</span>
-alg.sample_count = 50;
+<span class="comment">% Type of Culture Influence Method</span>
+alg.influence_type = 3;
 
-<span class="comment">% Intensification Factor (Selection Pressure)</span>
-alg.q = 0.5;
+<span class="comment">% Acceptance Rate</span>
+alg.accept_rate = 0.2;
 
-<span class="comment">% Deviation-Distance Ratio</span>
-alg.zeta = 1;
-</pre><p>And now, we are ready to run the algorithm and solve the problem. The solve method, gets problem as input and returns <tt>best_sol</tt>, the best solution found by the algorithm.</p><pre class="codeinput">best_sol = alg.solve(problem);
-</pre><pre class="codeoutput">Ant Colony Optimization for Continuous Domains started ...
+<span class="comment">% Step Size Coefficient</span>
+alg.alpha = 0.9;
+</pre><p>We are ready to run the algorithm and solve the problem. The solve method, gets problem as input and returns <tt>best_sol</tt>, the best solution found by the algorithm.</p><pre class="codeinput">best_sol = alg.solve(problem);
+</pre><pre class="codeoutput">Cultural Algorithm started ...
 Initializing population.
-Iteration 1: Best this. Value = 531.1927, NFE = 60
-Iteration 2: Best this. Value = 447.3731, NFE = 110
-Iteration 3: Best this. Value = 438.3828, NFE = 160
-Iteration 4: Best this. Value = 257.0095, NFE = 210
-Iteration 5: Best this. Value = 257.0095, NFE = 260
+Iteration 1: Best this. Value = 373.1843, NFE = 100
+Iteration 2: Best this. Value = 86.0144, NFE = 150
+Iteration 3: Best this. Value = 0.08924, NFE = 200
+Iteration 4: Best this. Value = 0.08924, NFE = 250
+Iteration 5: Best this. Value = 0.00063332, NFE = 300
 .
 .
 .
-Iteration 195: Best this. Value = 1.5471e-07, NFE = 9760
-Iteration 196: Best this. Value = 1.4003e-07, NFE = 9810
-Iteration 197: Best this. Value = 1.4003e-07, NFE = 9860
-Iteration 198: Best this. Value = 1.4003e-07, NFE = 9910
-Iteration 199: Best this. Value = 1.2706e-07, NFE = 9960
-Iteration 200: Best this. Value = 1.1082e-07, NFE = 10010
+Iteration 96: Best this. Value = 0, NFE = 4850
+Iteration 97: Best this. Value = 0, NFE = 4900
+Iteration 98: Best this. Value = 0, NFE = 4950
+Iteration 99: Best this. Value = 0, NFE = 5000
+Iteration 100: Best this. Value = 0, NFE = 5050
 End of optimization.
 </pre><p>You may turn of the text output, by disabling the display property, just befor running the algorithm (i.e. calling <tt>alg.solve(problem)</tt>).</p><pre class="codeinput">alg.display = false;
-</pre><h2 id="11">Results</h2><p>The actual solution, is stored in the <tt>solution</tt> field of <tt>best_sol</tt>.</p><pre class="codeinput">best_sol.solution
+</pre><h2 id="13">Results</h2><p>The actual solution, is stored in the <tt>solution</tt> field of <tt>best_sol</tt>.</p><pre class="codeinput">best_sol.solution
 </pre><pre class="codeoutput">
 ans = 
 
   struct with fields:
 
-    x: [1&times;20 double]
+    x: [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
 
 </pre><p>The values of 20 decision variables, denoted by <tt>x</tt> is as follows:</p><pre class="codeinput">best_sol.solution.x
 </pre><pre class="codeoutput">
 ans =
 
-   1.0e-03 *
+  Columns 1 through 13
 
-  Columns 1 through 7
+     0     0     0     0     0     0     0     0     0     0     0     0     0
 
-    0.0694   -0.0201   -0.0278   -0.0411   -0.1416   -0.0091    0.0257
+  Columns 14 through 20
 
-  Columns 8 through 14
-
-   -0.0653    0.0547    0.0935    0.1529   -0.0941    0.0702    0.0237
-
-  Columns 15 through 20
-
-   -0.0476    0.0022    0.0406    0.0810   -0.0684    0.1161
+     0     0     0     0     0     0     0
 
 </pre><p>and the related objective value is:</p><pre class="codeinput">best_sol.obj_value
 </pre><pre class="codeoutput">
 ans =
 
-   1.1082e-07
+     0
 
 </pre><p>Total run time of the algorithm is given by (in seconds):</p><pre class="codeinput">alg.run_time
 </pre><pre class="codeoutput">
 ans =
 
-    3.0193
+    1.0425
 
 </pre><p>and total number of function evaluations is given by:</p><pre class="codeinput">alg.nfe
 </pre><pre class="codeoutput">
 ans =
 
-       10010
+        5050
 
 </pre><p>We can illustrate the result of optimization process by plotting best objective value history (<tt>alg.best_obj_value_history</tt>) vs. number of function evaluations (<tt>alg.nfe_history</tt>).</p><pre class="codeinput">figure;
 alg.semilogy(<span class="string">'nfe'</span>, <span class="string">'LineWidth'</span>, 2);
@@ -154,11 +148,11 @@ xlabel(<span class="string">'NFE'</span>);
 ylabel(<span class="string">'Best Objective Value'</span>);
 title([<span class="string">'Results of '</span> alg.full_name]);
 grid <span class="string">on</span>;
-</pre><img vspace="5" hspace="5" src="doc_ypea_acor_01.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+</pre><img vspace="5" hspace="5" src="doc_ypea_ca_01.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2020b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
-%% Ant Colony Optimization for Continuous Domains
+%% Cultural Algorithm
 % This document shows how
-% *Ant Colony Optimization for Continuous Domains (ACOR)*
+% *Cultural Algorithm (CA)*
 % as a part of Yarpiz Evolutionary Algorithms Toolbox (YPEA)
 % cab be used to solve optimization problems.
 
@@ -186,35 +180,61 @@ problem.obj_func = @(sol) sphere(sol.x);
 % <doc_ypea_problem.html Optimization Problems> and
 % <doc_ypea_var.html Decision Variables>.
 
-%% Ant Colony Optimization for Continuous Domains
+%% Cultural Algorithm
 % Now, we are ready to create, initialize and utilize the
-% Ant Colony Optimization for Continuous Domains (ACOR)
+% Cultural Algorithm (CA)
 % to solve the optimization problem, defined above.
 
 %%
 % First, we must create an instance of algorithm class:
-alg = ypea_acor();
+alg = ypea_ca();
 
 %%
-% Let's set the parameters of the algorithm.
+% There are four type of influence method for Cultural Algorithm
+% available in YPEA Toolbox. The method is defined and set by
+% |alg.influence_type|. Available culture influence methods are listed
+% below:
+% 
+% * *Using only normative component of culture* (for size),
+% which can be set and used by |alg.influence_type = 1|.
+% * *Using only situational component of culture* (for direction),
+% which can be set and used by |alg.influence_type = 2|.
+% * *Using both normative and situational components of culture*,
+% which can be set and used by |alg.influence_type = 3|. This is the
+% default method.
+% * *Using normative component of culture* (for both size ans direction),
+% which can be set and used by |alg.influence_type = 4|.
+% 
+
+%%
+% Other parameters for the Cultural Algorithm are listed below:
+% 
+% * Acceptance Rate, which determines the number of individuals used to adjust culture (|accept_rate|, default: 0.2)
+% * Step Size Coefficient (|alpha|, default: 0.9)
+% * Scaling Factor, which is only used by 4th influence method (|beta|, default: 0.5)
+% 
+
+%%
+% Now, let's set the parameters of the algorithm.
 
 % Maximum Number of Iterations
-alg.max_iter = 200;
+alg.max_iter = 100;
 
-% Population Size (Solution Archive Size)
-alg.pop_size = 10;
+% Population Size
+alg.pop_size = 50;
 
-% Number of Newly Generated Samples
-alg.sample_count = 50;
+% Type of Culture Influence Method
+alg.influence_type = 3;
 
-% Intensification Factor (Selection Pressure)
-alg.q = 0.5;
+% Acceptance Rate
+alg.accept_rate = 0.2;
 
-% Deviation-Distance Ratio
-alg.zeta = 1;
+% Step Size Coefficient
+alg.alpha = 0.9;
+
 
 %%
-% And now, we are ready to run the algorithm and solve the problem.
+% We are ready to run the algorithm and solve the problem.
 % The solve method, gets problem as input and returns |best_sol|, the best solution found
 % by the algorithm.
 

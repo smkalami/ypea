@@ -3,10 +3,11 @@
 % Evolutionary Algorithms and Metaheuristics
 %   ypea_algorithm                        - Abstract Evolutionary Algorithm (Abs. EA)
 %   ypea_abc                              - Artificial Bee Colony (ABC)
-%   ypea_acor                             - Continuous Ant Colony Optimization (ACOR)
+%   ypea_acor                             - Ant Colony Optimization for Continuous Domains (ACOR)
 %   ypea_ba                               - Bees Algorithm (BA)
 %   ypea_bbo                              - Biogeography-based Optimization (BBO)
 %   ypea_cmaes                            - Covariance Matrix Adaptation Evolution Strategy (CMA-ES)
+%   ypea_ca                               - Cultural Algorithm (CA)
 %   ypea_de                               - Differential Evolution (DE)
 %   ypea_fa                               - Exponent
 %   ypea_ga                               - Genetic Algorithm (GA)

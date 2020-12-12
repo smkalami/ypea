@@ -2,8 +2,8 @@
     xsi:noNamespaceSchemaLocation="optional">
     <?xml-stylesheet type="text/xsl"href="optional"?>
     <!-- info.xml file for Yarpiz Evolutionary Algorithms Toolbox (YPEA) -->
-    <!-- Version 1.0 -->
-    <!-- Copyright (2019) Yarpiz.-->
+    <!-- Version 1.1 -->
+    <!-- Copyright (2020) Yarpiz.-->
     
     <!-- Supply the following six elements in the order specified -->
     <!-- (Required) Release of MATLAB. Not currently used but required -->

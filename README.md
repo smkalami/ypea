@@ -1,30 +1,31 @@
-# YPEA: Yarpiz Evolutionary Algorithms
+# Yarpiz Evolutionary Algorithms (YPEA) Toolbox for MATLAB
 YPEA for MATLAB is a general-purpose toolbox to define and solve optimization problems using Evolutionary Algorithms (EAs) and Metaheuristics. To use this toolbox, you just need to define your optimization problem and then, give the problem to one of algorithms provided by YPEA, to get it solved.
 
 ## List of Provided Algorithms
 Currently YPEA supports these algorithms to solve optimization problems. The list is sorted in alphabetic order.
 
 1. Artificial Bee Colony (ABC)
-2. Continuous Ant Colony Optimization (ACOR)
+2. Ant Colony Optimization for Continuous Domains (ACOR)
 3. Bees Algorithm (BA)
 4. Biogeography-based Optimization (BBO)
 5. Covariance Matrix Adaptation Evolution Strategy (CMA-ES)
-6. Differential Evolution (DE)
-7. Firefly Algorithm (FA)
-8. Genetic Algorithm (GA)
-9. Harmony Search (HS)
-10. Imperialist Competitive Algorithm (ICA)
-11. Invasive Weed Optimization (IWO)
-12. Particle Swarm Optimization (PSO)
-13. Simulated Annealing (SA)
-14. Teaching-Learning-based Optimization (TLBO)
+6. Cultural Algorithm (CA)
+7. Differential Evolution (DE)
+8. Firefly Algorithm (FA)
+9. Genetic Algorithm (GA)
+10. Harmony Search (HS)
+11. Imperialist Competitive Algorithm (ICA)
+12. Invasive Weed Optimization (IWO)
+13. Particle Swarm Optimization (PSO)
+14. Simulated Annealing (SA)
+15. Teaching-Learning-based Optimization (TLBO)
 
 ## Installation
 A MATLAB toolbox package file (*.mltbx) is available in the **dist** folder. You can right-click on this file inside MATLAB, and select the Install option to get it installed on your machine. This is the recommended way of installing YEPA.
 
 However, if you prefer, the source code for YPEA is available in **src** folder, and you cand download it and add the **ypea** folder to the path of your MATLAB installation. 
 
-The toolbox has its own documentation, which is accessible via MATLAB documentation center. You may find it under **Supplemental Software** section of MATLAB documentation center.
+The toolbox has its own documentation, which is accessible via MATLAB documentation center. You may find it under **Supplemental Software** section of MATLAB documentation center. To access the documentation from command line, type **doc ypea**. The documentation for toolbox will be shown.
 
 ## How YPEA Works?
 The main steps to setup your problem and solve it using YPEA are listed below:

@@ -1,4 +1,4 @@
-% Continuous Ant Colony Optimization (ACOR)
+% Ant Colony Optimization for Continuous Domains (ACOR)
 classdef ypea_acor < ypea_algorithm
     
     properties
@@ -23,7 +23,7 @@ classdef ypea_acor < ypea_algorithm
             this@ypea_algorithm();
             
             % Set the Algorithm Name
-            this.name = 'Continuous Ant Colony Optimization';
+            this.name = 'Ant Colony Optimization for Continuous Domains';
             this.short_name = 'ACOR';
             
         end
