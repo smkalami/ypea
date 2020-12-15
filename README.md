@@ -141,3 +141,8 @@ Supported variable types in YPEA, are listed below:
   - Sample usage: Transportation Problem.
 
 All of these variable types are encoded to real values in the range of [0,1]. Hence, all of the algorithms implemented in YPEA can be used to solve any defined problem, interchangeably.
+
+## Citing YPEA
+YPEA Toolbox for MATLAB is open-source and free to use. If you are going to use the toolbox in your research projects and you want to cite that, please use the following format.
+
+**Mostapha Kalami Heris, Yarpiz Evolutionary Algorithms Toolbox for MATLAB (YPEA), Yarpiz, 2020.**
